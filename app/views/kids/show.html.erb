@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @kid.name %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%= @kid.image %>
+</p>
+
+<p>
+  <b>Dob:</b>
+  <%= @kid.dob %>
+</p>
+
+<p>
+    <b>Points</b>
+    <%= @kid.chores.count %>
+
+
+</p>
+
+<%= link_to 'Edit', edit_kid_path(@kid) %> |
+<%= link_to 'Back', kids_path %>

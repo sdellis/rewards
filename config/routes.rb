@@ -1,4 +1,10 @@
 Rewards::Application.routes.draw do
+  resources :chores
+
+
+  resources :kids
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

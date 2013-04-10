@@ -1,0 +1,26 @@
+    
+<h1>Rewards Tracker</h1>
+<div class="row-fluid">
+  <ul class="thumbnails">
+    <% @kids.each do |kid| %>
+      <li class="span3">
+      <div class="thumbnail">
+        <a href="#" class="thumbnail">
+          <img alt="<%= kid.name %>" style="width: 250px; height: 250px;" src="<%= kid.image %>">
+        </a>
+        <div class="caption">
+          <h3><%= kid.name %></h3>
+          <h4>Points:<%= kid.chores.count %></h4>
+          <%= button_to '+1 Point', chores_path(kid_id: kid.id, points: 1), method: :post %>
+          <a href="#" class="btn btn-primary"></a> 
+          <a href="#" class="btn btn-warning"><i class="icon-star"></i>+5 Bonus</a></p>
+        </div>
+      </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<br />
+
+<%= link_to 'Add Kid', new_kid_path %>
