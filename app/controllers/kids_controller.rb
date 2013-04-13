@@ -57,14 +57,25 @@ class KidsController < ApplicationController
   # PUT /kids/1.json
   def update
     @kid = Kid.find(params[:id])
-
-    respond_to do |format|
-      if @kid.update_attributes(params[:kid])
-        format.html { redirect_to @kid, notice: 'Kid was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @kid.errors, status: :unprocessable_entity }
+    if params[:spendamt]
+      respond_to do |format|
+        if @kid.spend(params[:spendamt].to_i)
+          format.html { redirect_to kids_path, notice: 'Kid spent #{params[:spendamt]} points.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @kid.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        if @kid.update_attributes(params[:kid])
+          format.html { redirect_to @kid, notice: 'Kid was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @kid.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

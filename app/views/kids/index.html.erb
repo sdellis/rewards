@@ -2,10 +2,7 @@
 <h1>Rewards Tracker</h1>
 <div class="row-fluid">
   <ul class="thumbnails">
-    <% @kids.each do |kid| 
-          total_points=0 
-          kid.chores.each {|chore| total_points = total_points + chore.points } 
-          %>
+    <% @kids.each do |kid| %>
       <li class="span3">
       <div class="thumbnail">
         <a href="#" class="thumbnail">
@@ -13,10 +10,18 @@
         </a>
         <div class="caption">
           <h3><%= kid.name %></h3>
-          <h4>Points:<%= total_points %></h4>
+          <h4>Points:<%= kid.total_points %></h4>
           <%= link_to '+1 Point', chores_path(kid_id: kid.id, points: 1), method: :post, class: "btn btn-primary" %>
           <%= link_to raw("<i class=icon-star></i>+5 Bonus"), chores_path(kid_id: kid.id, points: 5), method: :post, class: "btn btn-warning" %>
-
+          <p>
+            <form method="post" action="<%= kid_path(kid) %>">
+              <input id="spendamt" name="spendamt" type="text" style="width:15px; margin-top:10px"/>
+              <button class="btn btn-danger">
+                Spend Points
+              </button>
+              <input name="_method" type="hidden" value="put">
+            </form>
+          </p>
           <!--<p><%= button_to 'Delete', kid, confirm: 'Are you sure?', method: :delete %></p>-->
         </div>
       </div>
